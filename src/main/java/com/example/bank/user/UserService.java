@@ -4,6 +4,7 @@ import com.example.bank._core.errors.exception.Exception401;
 import com.example.bank._core.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -15,5 +16,13 @@ public class UserService {
                 .orElseThrow(() -> new Exception401("유저네임 혹은 패스워드가 틀렸습니다"));
         String jwt = JwtUtil.create(user);
         return jwt;
+    }
+
+    @Transactional
+    public UserResponse.DTO 회원가입(UserRequest.JoinDTO reqDTO) {
+
+        User user = userRepository.save(reqDTO.toEntity());
+        return new UserResponse.DTO(user);
+
     }
 }

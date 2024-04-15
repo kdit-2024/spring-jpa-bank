@@ -33,4 +33,5 @@ public class User {
         this.fullname = fullname;
         this.createdAt = createdAt;
     }
+
 }
