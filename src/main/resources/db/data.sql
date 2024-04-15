@@ -1,6 +1,6 @@
-insert into user_tb(username,password,fullname,created_at) values ('ssar','1234','홍길동',now());
-insert into user_tb(username,password,fullname,created_at) values ('cos','1234','임꺽정',now());
-insert into user_tb(username,password,fullname,created_at) values ('love','1234','이순신',now());
+insert into user_tb(username,password,fullname, email, created_at) values ('ssar','1234','홍길동', 'ssar@nate.com', now());
+insert into user_tb(username,password,fullname, email, created_at) values ('cos','1234','임꺽정','cos@nate.com', now());
+insert into user_tb(username,password,fullname, email, created_at) values ('love','1234','이순신','love@nate.com', now());
 
 insert into account_tb(user_id,number,password,balance,status,created_at) values (1,1111,'1234',600,true,now());
 insert into account_tb(user_id,number,password,balance,status,created_at) values (2,2222,'1234',1000,true,now());
