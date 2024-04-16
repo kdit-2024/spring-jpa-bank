@@ -14,6 +14,13 @@ public class UserController {
     private final HttpSession session;
     private final UserService userService;
 
+    @PostMapping("/join")
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO){
+       UserResponse.DTO respDTO = userService.회원가입(reqDTO);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
+    }
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO){
         String jwt = userService.로그인(reqDTO.getUsername(), reqDTO.getPassword());
