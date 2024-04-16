@@ -10,4 +10,10 @@ public class AccountRequest {
         private Long amount;
         private String senderPassword;
     }
+
+    @Data
+    public static class CreateDTO {
+        private String password;
+        private Long balance;
+    }
 }

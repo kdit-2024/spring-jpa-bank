@@ -34,4 +34,12 @@ public class AccountController {
         AccountResponse.MainDTO respDTO = accountService.계좌목록보기(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
+
+    @PostMapping("/api/accounts")
+    public ResponseEntity<?> withdraw(@RequestBody AccountRequest.CreateDTO reqDTO){
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        AccountResponse.CreateDTO respDTO = accountService.계좌생성(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
+    }
+
 }

@@ -29,4 +29,6 @@ public class UserRepositoryTest {
         //Assertions.assertThat(userOP.get()).isNotNull();
         Assertions.assertThat(userOP.get().getUsername()).isEqualTo("ssar");
     }
+
+
 }
