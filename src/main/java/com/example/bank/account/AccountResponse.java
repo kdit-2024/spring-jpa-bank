@@ -106,13 +106,13 @@ public class AccountResponse {
     }
 
     @Data
-    public static class CreateDTO {
+    public static class SaveDTO {
         private String username;
         private String fullname;
         private Integer number;
         private Long balance;
 
-        public CreateDTO(Account account, User user) {
+        public SaveDTO(Account account, User user) {
             this.username = user.getUsername();
             this.fullname = user.getFullname();
             this.number = account.getNumber();

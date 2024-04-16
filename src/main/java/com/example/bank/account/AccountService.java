@@ -89,7 +89,7 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountResponse.CreateDTO 계좌생성(AccountRequest.CreateDTO reqDTO, SessionUser sessionUser) {
+    public AccountResponse.SaveDTO 계좌생성(AccountRequest.SaveDTO reqDTO, SessionUser sessionUser) {
         User user = userRepository.findById(sessionUser.getId()).orElseThrow(() -> new Exception404("유저가 존재하지 않습니다"));
 
         //계좌 번호 랜덤 생성
@@ -108,6 +108,6 @@ public class AccountService {
                 .build();
 
         Account createdAccount=accountRepository.save(account);
-        return new AccountResponse.CreateDTO(createdAccount, user);
+        return new AccountResponse.SaveDTO(createdAccount, user);
     }
 }

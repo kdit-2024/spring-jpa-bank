@@ -36,9 +36,9 @@ public class AccountController {
     }
 
     @PostMapping("/api/accounts")
-    public ResponseEntity<?> withdraw(@RequestBody AccountRequest.CreateDTO reqDTO){
+    public ResponseEntity<?> withdraw(@RequestBody AccountRequest.SaveDTO reqDTO){
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        AccountResponse.CreateDTO respDTO = accountService.계좌생성(reqDTO, sessionUser);
+        AccountResponse.SaveDTO respDTO = accountService.계좌생성(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
