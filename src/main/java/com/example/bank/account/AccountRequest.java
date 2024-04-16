@@ -13,6 +13,7 @@ public class AccountRequest {
 
     @Data
     public static class SaveDTO {
+
         private String password;
         private Long balance;
     }
