@@ -6,18 +6,22 @@ import com.example.bank._core.errors.exception.Exception404;
 import com.example.bank.history.History;
 import com.example.bank.history.HistoryRepository;
 import com.example.bank.user.SessionUser;
+import com.example.bank.user.User;
+import com.example.bank.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
 public class AccountService {
     private final AccountRepository accountRepository;
     private final HistoryRepository historyRepository;
+    private final UserRepository userRepository;
 
     public AccountResponse.MainDTO 계좌목록보기(int userId) {
         List<Account> accountList = accountRepository.findByUserId(userId);
@@ -82,5 +86,28 @@ public class AccountService {
 
         historyRepository.save(history);
         return new AccountResponse.TransferDTO(history);
+    }
+
+    @Transactional
+    public AccountResponse.CreateDTO 계좌생성(AccountRequest.CreateDTO reqDTO, SessionUser sessionUser) {
+        User user = userRepository.findById(sessionUser.getId()).orElseThrow(() -> new Exception404("유저가 존재하지 않습니다"));
+
+        //계좌 번호 랜덤 생성
+        Integer number=null;
+        do {
+            number = (int) (Math.random() * 9000) + 1000;
+        }while(accountRepository.findByNumber(number).isPresent());
+
+        //계좌 생성
+        Account account = Account.builder()
+                .user(user)
+                .number(number)
+                .password(reqDTO.getPassword())
+                .balance(reqDTO.getBalance())
+                .status(true)
+                .build();
+
+        Account createdAccount=accountRepository.save(account);
+        return new AccountResponse.CreateDTO(createdAccount, user);
     }
 }

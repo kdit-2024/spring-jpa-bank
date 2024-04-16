@@ -104,4 +104,19 @@ public class AccountResponse {
             }
         }
     }
+
+    @Data
+    public static class CreateDTO {
+        private String username;
+        private String fullname;
+        private Integer number;
+        private Long balance;
+
+        public CreateDTO(Account account, User user) {
+            this.username = user.getUsername();
+            this.fullname = user.getFullname();
+            this.number = account.getNumber();
+            this.balance = account.getBalance();
+        }
+    }
 }

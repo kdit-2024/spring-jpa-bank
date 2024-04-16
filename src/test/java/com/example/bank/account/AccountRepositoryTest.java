@@ -57,4 +57,19 @@ public class AccountRepositoryTest {
 
         // then
     }
+
+    @Test
+    public void RandomNumber_test() {
+        //given
+        Integer number=1111;
+
+        //when
+        do {
+            number = (int) (Math.random() * 9000) + 1000;
+        }while(accountRepository.findByNumber(number).isPresent());
+        
+        //eye
+        System.out.println("number = " + number);
+        
+    }
 }
